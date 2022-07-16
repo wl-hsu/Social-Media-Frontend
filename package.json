@@ -3,24 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.5",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "antd-mobile": "^5.18.0",
     "antd-mobile-icons": "^0.3.0",
     "axios": "^0.27.2",
+    "craco-alias": "^3.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
     "react": "^17.0.2",
     "react-device-detect": "^2.2.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "vconsole": "^3.14.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "mock": "npx json-server --watch ./mock/db.json --routes ./mock/routes.json --port 3333"
   },
   "eslintConfig": {

@@ -1,6 +1,6 @@
 import { Button, Input } from 'antd-mobile';
-import DatePickerInput from '../../components/DatePickerInput';
-import Header from '../../components/Header';
+import DatePickerInput from '@components/DatePickerInput';
+import Header from '@components/Header';
 
 import style from './index.module.css';
 
