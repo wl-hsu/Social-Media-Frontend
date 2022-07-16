@@ -1,5 +1,5 @@
 import { CloseOutline } from 'antd-mobile-icons';
-import logo from '../../assets/twitter-logo.svg';
+import logo from '@assets/twitter-logo.svg';
 
 import style from './index.module.css';
 
