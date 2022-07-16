@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import Register from './containers/Register';
+
 import { startVconsole } from './utils';
-import Login from './containers/Login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <Register />
   </React.StrictMode>,
   document.getElementById('root'),
 );
 
+// vconsole
 startVconsole();
