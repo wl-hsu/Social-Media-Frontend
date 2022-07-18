@@ -1,76 +1,56 @@
 import { useState } from 'react';
-import { Button, Form } from 'antd-mobile';
-import DatePickerInput from '@components/DatePickerInput';
+import { Toast } from 'antd-mobile';
 import Header from '@components/Header';
-import TInput from '@components/TInput';
+import { registerUser } from '@services/register';
+import Show from '@components/Show';
+import FirstStep from './components/FirstStep';
+import SecondStep from './components/SecondStep';
 
-import style from './index.module.scss';
-
-const ACCOUNT_TYPE = {
-  Phone: 0,
-  Email: 1,
+// Step count
+const STEP = {
+  FIRST: 1,
+  SECOND: 2,
 };
-
 /**
- * register page
+ * Register page
  */
 const Register = () => {
-  const [form] = Form.useForm();
-  const [formData] = useState({
-    Name: '',
-    Phone: '',
-    Email: '',
-    birthday: '20220203',
-  });
-  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.Phone);
+  const [step, setStep] = useState(STEP.FIRST);
+  const [userInfo, setUserInfo] = useState({});
 
-  const onAccountTypeChange = () => {
-    if (accountType === ACCOUNT_TYPE.Phone) {
-      setAccountType(ACCOUNT_TYPE.EMAIl);
-      return;
-    }
-    setAccountType(ACCOUNT_TYPE.Phone);
+  const gotoNextStepHandler = (data) => {
+    setUserInfo(data);
+    setStep(STEP.SECOND);
   };
 
-  const onClickNextStep = async () => {
-    const validate = await form.validateFields();
-    if (validate) {
-      console.log(validate);
+  const confirmRegisterHandler = async (password) => {
+    const res = await registerUser({
+      password,
+      ...userInfo,
+    });
+    if (res.success) {
+      Toast.show('Signup success');
+      return;
     }
+    Toast.show('Signup failure');
+  };
+
+  const onClickClose = () => {
+    setStep(STEP.FIRST);
   };
 
   return (
     <div>
-      <Header />
-      <div className={style.form}>
-        <div className={style.formTitle}>Create your account</div>
-        <Form form={form} initialValues={formData} className={style.formContainer}>
-          <Form.Item name="Name" rules={[{ required: true, message: 'Name is required' }]}>
-            <TInput length={50} label="Name" />
-          </Form.Item>
-          {accountType === ACCOUNT_TYPE.Phone && (
-          <Form.Item name="Phone" rules={[{ required: true, message: 'Phone is required' }]}>
-            <TInput length={10} label="Phone" />
-          </Form.Item>
-          )}
-          {accountType === ACCOUNT_TYPE.EMAIl && (
-          <Form.Item name="Email" rules={[{ required: true, message: 'Email is required' }]}>
-            <TInput label="Email" />
-          </Form.Item>
-          )}
-          <div className={style.changeTypeButton} onClick={onAccountTypeChange}>
-            {accountType === ACCOUNT_TYPE.EMAIl ? 'Use phone instead' : 'Use email instead'}
-          </div>
-          <div className={style.birthdayTitle}>Date of birth</div>
-          <div className={style.privatePolicyAnnouncment}>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</div>
-          <Form.Item name="birthday">
-            <DatePickerInput />
-          </Form.Item>
-        </Form>
-      </div>
-      <div className={style.footer}>
-        <Button className={style.footerButton} onClick={onClickNextStep}>下一步</Button>
-      </div>
+      <Header onClickClose={onClickClose} />
+      <Show visible={step === STEP.FIRST}>
+        <FirstStep gotoNextStepHandler={gotoNextStepHandler} />
+      </Show>
+      <Show visible={step === STEP.SECOND}>
+        <SecondStep
+          userInfo={userInfo}
+          confirmRegisterHandler={confirmRegisterHandler}
+        />
+      </Show>
     </div>
   );
 };

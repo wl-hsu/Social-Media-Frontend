@@ -13,6 +13,7 @@
     "craco-alias": "^3.0.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -27,7 +28,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "mock": "npx json-server --watch ./mock/db.json --routes ./mock/routes.json --port 3333"
+    "mock": "node ./mock/server.js"
   },
   "eslintConfig": {
     "extends": [
