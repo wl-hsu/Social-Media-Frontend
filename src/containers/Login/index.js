@@ -1,50 +1,74 @@
+import Header from '@components/Header';
+import TInput from '@components/TInput';
 import {
-  Button, Input, Form, Dialog,
+  Button, Form, Dialog,
 } from 'antd-mobile';
-import './index.css';
-import { loginService } from '../../services/login';
+import { login } from '../../services/login';
+import style from './index.module.scss';
 
-const initialValues = {
-  username: 'test1',
-  password: '123456',
-};
-
+/**
+ * Login page
+ */
 const Login = () => {
   const [form] = Form.useForm();
-  const onSbubmit = async () => {
-    const values = form.getFieldsValue();
-    const res = await loginService(values.username, values.password);
-    if (res && res.length > 0) {
+
+  const onSubmit = async () => {
+    const values = await form.validateFields();
+    if (values) {
+      const res = await login(values.username, values.password);
+      console.log('>>', res);
+      if (res.success && res.data.length > 0) {
+        Dialog.alert({
+          content: 'Login success',
+        });
+        return;
+      }
       Dialog.alert({
-        content: 'Login suceesfully',
+        content: 'Login failure',
       });
-      return;
     }
-    Dialog.alert({
-      content: 'Login failed',
-    });
   };
+
   return (
-    <div className="login">
-      <Form
-        form={form}
-        layout="horizontal"
-        mode="card"
-        initialValues={initialValues}
-        footer={(
-          <Button color="primary" onClick={onSbubmit} size="large">
-            Login
+    <>
+      <Header />
+      <div className={style.login}>
+        <div className={style.formTitle}>Login twitter</div>
+        <Form
+          form={form}
+          className={style.formContainer}
+        >
+          <Form.Item
+            name="username"
+            rules={[
+              { required: true, message: 'Username is required' },
+            ]}
+          >
+            <TInput label="Username" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: 'Password is required' },
+            ]}
+          >
+            <TInput label="Password" type="password" />
+          </Form.Item>
+          <Button className={style.footerButton} onClick={onSubmit}>
+            Next
           </Button>
-          )}
-      >
-        <Form.Item label="username" name="username">
-          <Input placeholder="username" clearable type="username" />
-        </Form.Item>
-        <Form.Item label="password" name="password">
-          <Input placeholder="password" clearable type="password" />
-        </Form.Item>
-      </Form>
-    </div>
+        </Form>
+        <div className={style.goToRegister}>
+          New to twitter?
+          <a
+            href="/"
+            target="_blank"
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </>
   );
 };
 

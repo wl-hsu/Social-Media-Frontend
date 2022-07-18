@@ -8,13 +8,17 @@ const Header = ({
   onClickClose,
 }) => (
   <div className={style.header}>
-    <CloseOutline className={style.closeIcon} onClick={onClickClose} />
+    {onClickClose && <CloseOutline className={style.closeIcon} onClick={onClickClose} />}
     <img src={logo} alt="twitter-logo" className={style.twitterLog} />
   </div>
 );
 
 Header.propTypes = {
-  onClickClose: PropTypes.func.isRequired,
+  onClickClose: PropTypes.func,
+};
+
+Header.defaultProps = {
+  onClickClose: null,
 };
 
 export default Header;
