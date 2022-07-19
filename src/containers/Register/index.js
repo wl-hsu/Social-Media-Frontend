@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Toast } from 'antd-mobile';
-import Header from '@components/Header';
+// import Header from '@components/Header';
 import { registerUser } from '@services/register';
 import Show from '@components/Show';
 import FirstStep from './components/FirstStep';
@@ -35,13 +35,12 @@ const Register = () => {
     Toast.show('Signup failure');
   };
 
-  const onClickClose = () => {
-    setStep(STEP.FIRST);
-  };
+  // const onClickClose = () => {
+  //   setStep(STEP.FIRST);
+  // };
 
   return (
     <div>
-      <Header onClickClose={onClickClose} />
       <Show visible={step === STEP.FIRST}>
         <FirstStep gotoNextStepHandler={gotoNextStepHandler} />
       </Show>

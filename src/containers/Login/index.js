@@ -1,8 +1,8 @@
-import Header from '@components/Header';
 import TInput from '@components/TInput';
 import {
   Button, Form, Dialog,
 } from 'antd-mobile';
+import { Link } from 'react-router-dom';
 import { login } from '../../services/login';
 import style from './index.module.scss';
 
@@ -30,45 +30,41 @@ const Login = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className={style.login}>
-        <div className={style.formTitle}>Login twitter</div>
-        <Form
-          form={form}
-          className={style.formContainer}
+    <div className={style.login}>
+      <div className={style.formTitle}>Login twitter</div>
+      <Form
+        form={form}
+        className={style.formContainer}
+      >
+        <Form.Item
+          name="username"
+          rules={[
+            { required: true, message: 'Username is required' },
+          ]}
         >
-          <Form.Item
-            name="username"
-            rules={[
-              { required: true, message: 'Username is required' },
-            ]}
-          >
-            <TInput label="Username" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              { required: true, message: 'Password is required' },
-            ]}
-          >
-            <TInput label="Password" type="password" />
-          </Form.Item>
-          <Button className={style.footerButton} onClick={onSubmit}>
-            Next
-          </Button>
-        </Form>
-        <div className={style.goToRegister}>
-          New to twitter?
-          <a
-            href="/"
-            target="_blank"
-          >
-            Sign up
-          </a>
-        </div>
+          <TInput label="Username" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            { required: true, message: 'Password is required' },
+          ]}
+        >
+          <TInput label="Password" type="password" />
+        </Form.Item>
+        <Button className={style.footerButton} onClick={onSubmit}>
+          Next
+        </Button>
+      </Form>
+      <div className={style.goToRegister}>
+        New to twitter?
+        <Link
+          to="/register"
+        >
+          Sign up
+        </Link>
       </div>
-    </>
+    </div>
   );
 };
 
