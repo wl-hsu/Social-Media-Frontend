@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-// import Register from './containers/Register';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from '@containers/Login';
+import App from '@containers/App';
+import Register from '@containers/Register';
+
+import './index.css';
 
 // import { startVconsole } from './utils';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Register /> */}
-    <Login />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
