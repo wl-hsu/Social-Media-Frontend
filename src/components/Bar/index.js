@@ -1,6 +1,7 @@
 import { TabBar } from 'antd-mobile';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import cycleSvg from '@assets/cycle.svg';
 import starSvg from '@assets/star.svg';
 import upSvg from '@assets/up.svg';
@@ -39,6 +40,7 @@ const getBars = ({
 * bar for comment, Retweet, like, share
 */
 const Bar = ({
+  isBottom,
   likesCount,
   commentsCount,
 }) => {
@@ -49,7 +51,11 @@ const Bar = ({
   };
 
   return (
-    <div className={style.container}>
+    <div className={classNames({
+      [style.container]: !isBottom,
+      [style.containerBottom]: isBottom,
+    })}
+    >
       <TabBar activeKey={activeKey} onChange={onChangeTabItem}>
         {getBars({
           likesCount,
@@ -65,6 +71,11 @@ const Bar = ({
 Bar.propTypes = {
   commentsCount: PropTypes.number.isRequired,
   likesCount: PropTypes.number.isRequired,
+  isBottom: PropTypes.bool,
+};
+
+Bar.defaultProps = {
+  isBottom: false,
 };
 
 export default Bar;
