@@ -32,7 +32,7 @@ const SecondStep = ({
   return (
     <div className={style.SecondStep}>
       <div className={style.form}>
-        <div className={style.formTitle}>Create your account</div>
+        <div className={style.formTitle}>Set your password</div>
         <div className={style.showLabelContainer}>
           <div className={style.showLabel}>
             Name:
