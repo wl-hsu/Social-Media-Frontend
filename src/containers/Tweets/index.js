@@ -14,6 +14,9 @@ const Tweets = () => {
   return (
     <div className={style.container}>
       <TweetCard />
+      <TweetCard />
+      <TweetCard />
+      <TweetCard />
     </div>
   );
 };
