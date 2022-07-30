@@ -5,6 +5,7 @@ import {
 } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '@utils/context';
+import cookies from 'js-cookie';
 import { login } from '../../services/login';
 import style from './index.module.scss';
 
@@ -30,6 +31,7 @@ const Login = () => {
         Dialog.alert({
           content: 'Login success',
         });
+        cookies.set('userId', res.data[0].id);
         return;
       }
       Dialog.alert({
