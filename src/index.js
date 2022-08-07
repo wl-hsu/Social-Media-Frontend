@@ -22,7 +22,7 @@ ReactDOM.render(
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="tweets" element={<Tweets />} />
-            <Route path="comment" element={<Comment />} />
+            <Route path="comment/:id" element={<Comment />} />
             <Route path="tip" element={<Comment />} />
             <Route path="message" element={<Comment />} />
             <Route path="search" element={<Comment />} />

@@ -38,7 +38,7 @@ const Bottom = () => {
     <div className={style.container}>
       <TabBar onChange={onChangeTabItem}>
         {menus.map((item) => (
-          <TabBar.Item key={item.key} icon={item.icon} />
+          item.isMenu && <TabBar.Item key={item.key} icon={item.icon} />
         ))}
       </TabBar>
     </div>
