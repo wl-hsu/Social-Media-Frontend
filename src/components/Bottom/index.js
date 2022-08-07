@@ -30,6 +30,10 @@ const Bottom = () => {
     go(key);
   };
 
+  if (menu.hideHeader) {
+    return null;
+  }
+
   return (
     <div className={style.container}>
       <TabBar onChange={onChangeTabItem}>

@@ -1,3 +1,5 @@
+import Header from '@components/Header';
+import TButton from '@components/TButton';
 import { useAppContext } from '@utils/context';
 import { Steps, TextArea } from 'antd-mobile';
 import moment from 'moment';
@@ -49,8 +51,14 @@ const Comment = () => {
   useEffect(() => {
     setDate(defaultTweet);
   }, []);
+  const onClickReply = () => {
+
+  };
   return (
     <div className={style.container}>
+      <Header>
+        <TButton onClick={onClickReply}>Reply</TButton>
+      </Header>
       <Steps
         direction="vertical"
       >

@@ -29,8 +29,16 @@ export const menus = [
     // eslint-disable-next-line no-undef
     icon: <img className={style.icon} src={messageSvg} alt="" />,
   },
+  {
+    key: 'comment',
+    title: 'Reply',
+    link: '/comment',
+    hideHeader: true,
+  },
 ];
 
 export const getMenuByKey = (key) => menus.find((item) => item.key === key);
 
 export const getMenuByLink = (link) => menus.find((item) => item.link === link);
+
+export const includeMenu = (link) => menus.some((item) => item.link === link);

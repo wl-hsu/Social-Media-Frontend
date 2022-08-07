@@ -2,6 +2,7 @@ import Bottom from '@components/Bottom';
 import Header from '@components/Header';
 import { getUser } from '@services/login';
 import { useAppContext } from '@utils/context';
+import { useCurMenu } from '@utils/hooks';
 import { Toast } from 'antd-mobile';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
@@ -13,6 +14,7 @@ const App = () => {
   const [, setStore] = useAppContext();
   const nav = useNavigate();
   const location = useLocation();
+  const menu = useCurMenu();
   useEffect(() => {
     const init = async () => {
       const userId = Cookies.get('userId');
@@ -38,7 +40,7 @@ const App = () => {
 
   return (
     <div className={style.container}>
-      <Header />
+      {!menu.hideHeader && <Header />}
       <Outlet />
       <Bottom />
     </div>
