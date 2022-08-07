@@ -7,7 +7,7 @@ import { getMenuByKey, menus } from '@utils/constants';
 import style from './index.module.scss';
 
 /**
-* bottom bar
+* Bottom bar
 */
 const Bottom = () => {
   const [, setStore] = useAppContext();

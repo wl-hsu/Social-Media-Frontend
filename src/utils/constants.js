@@ -37,7 +37,12 @@ export const menus = [
     key: 'comment',
     title: 'Reply',
     link: '/comment',
-    isMenu: true,
+    hideHeader: true,
+  },
+  {
+    key: 'createTweet',
+    title: 'Tweet',
+    link: '/createTweet',
     hideHeader: true,
   },
 ];

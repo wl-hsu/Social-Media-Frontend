@@ -7,7 +7,7 @@ import logo from '../../assets/twitter-logo.svg';
 import style from './index.module.scss';
 
 /**
- * public header
+ * 公共 header
  */
 const Header = ({
   children,
@@ -17,7 +17,7 @@ const Header = ({
   const go = useGoTo();
   const result = [];
 
-  // content for login status
+  // 登录状态下要展示的内容
   if (store.user) {
     if (menu.hideHeader) {
       result.push(
@@ -39,7 +39,7 @@ const Header = ({
       );
     }
   }
-  // content for non-login status
+  // 未登录状态下要展示的内容
   if (store.closeHeaderHandler) {
     result.push(
       <CloseOutline

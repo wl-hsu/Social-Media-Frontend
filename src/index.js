@@ -5,6 +5,7 @@ import Login from '@containers/Login';
 import App from '@containers/App';
 import Register from '@containers/Register';
 import { CxtProvider } from '@utils/context';
+import CreatTweet from '@containers/CreateTweet';
 
 import Tweets from '@containers/Tweets';
 import Comment from '@containers/Comment';
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path="login" element={<Login />} />
             <Route path="tweets" element={<Tweets />} />
             <Route path="comment/:id" element={<Comment />} />
+            <Route path="createTweet" element={<CreatTweet />} />
             <Route path="tip" element={<Comment />} />
             <Route path="message" element={<Comment />} />
             <Route path="search" element={<Comment />} />
