@@ -64,9 +64,7 @@ const TweetCard = () => {
           @
           <span className={style.username}>{tweet.user.username}</span>
           &nbsp;·&nbsp;
-          {moment(tweet.created_at).format('mm')}
-          {' '}
-          mins
+          {moment(tweet.created_at).format('MMM DD')}
         </div>
         <div className={style.content}>
           {tweet.content}
@@ -79,7 +77,7 @@ const TweetCard = () => {
           />
         </div>
         <div className={style.bar}>
-          <Bar commentsCount={tweet.comments_count} likesCount={tweet.likes_count} />
+          <Bar id={tweet.id} commentsCount={tweet.comments_count} likesCount={tweet.likes_count} />
         </div>
       </div>
     </div>

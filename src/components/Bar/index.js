@@ -14,10 +14,11 @@ const getBars = ({
   commentsCount,
   likesCount,
   nav,
+  id,
 }) => [{
   key: 'msg',
   icon: (
-    <div onClick={() => nav('/comment')}>
+    <div onClick={() => nav(`/comment/${id}`)}>
       <img className={style.icon} src={msgSvg} alt="" />
       {commentsCount > 0 && <span className={style.count}>{commentsCount}</span>}
     </div>),
@@ -42,6 +43,7 @@ const getBars = ({
 * bar for comment, Retweet, like, share
 */
 const Bar = ({
+  id,
   isBottom,
   likesCount,
   commentsCount,
@@ -63,6 +65,7 @@ const Bar = ({
           likesCount,
           commentsCount,
           nav,
+          id,
         }).map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} />
         ))}
@@ -75,6 +78,7 @@ Bar.propTypes = {
   commentsCount: PropTypes.number.isRequired,
   likesCount: PropTypes.number.isRequired,
   isBottom: PropTypes.bool,
+  id: PropTypes.number.isRequired,
 };
 
 Bar.defaultProps = {
