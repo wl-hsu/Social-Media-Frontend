@@ -22,9 +22,7 @@ export const CxtProvider = ({
   children,
 }) => {
   const [store, setStore] = useState(defaultStore);
-  console.log('store', store);
   const update = (v) => {
-    console.log('v', v);
     setStore((st) => ({
       ...st,
       ...v,
