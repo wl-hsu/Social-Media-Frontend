@@ -19,7 +19,7 @@ const defaultTweet = {
     id: 2, // The user id of the user who sent the tweet
     username: 'TesterForTweet1', // The username of the user who sent the tweet
     nickname: 'TFT1', // The nickname of the user who sent the tweet
-    avatar_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5wunazzu83CsNiaTIs7iXiGCrzk00_loyw&usqp=CAU.jpg', // 发送该推文的用户头像地址
+    avatar_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5wunazzu83CsNiaTIs7iXiGCrzk00_loyw&usqp=CAU.jpg', // The avatar address of the user who sent the tweet
   }, // Information about the user who sent the tweet
   comments: [
     {
@@ -38,7 +38,7 @@ const defaultTweet = {
     },
   ], // A collection of comments for this tweet
   created_at: '2022-07-20T07:38:01.699129Z', // when the tweet was created
-  content: 'Id values are not mutable. Any id value in the body of your PUT or PATCH request will be ignored. Only a value set in a POST request will be respected, but only if not already taken.', // The text content of the tweet
+  content: 'I wanna make a test', // The text content of the tweet
   likes: [], // who liked the tweet
   likes_count: 10, // Likes count for this tweet
   comments_count: 122, // comment counts for this tweet
