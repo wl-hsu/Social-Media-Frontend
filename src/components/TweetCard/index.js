@@ -27,7 +27,7 @@ const TweetCard = ({
           @
           <span className={style.username}>{dataSource.user.username}</span>
           &nbsp;·&nbsp;
-          {moment(dataSource.created_at).format('mm')}
+          {moment(dataSource.created_at).format('MMM DD')}
         </div>
         <div className={style.content} onClick={() => go('tweet', { id: dataSource.id })}>
           {dataSource.content}

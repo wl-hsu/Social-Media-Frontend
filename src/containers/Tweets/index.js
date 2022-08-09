@@ -3,6 +3,8 @@ import {
   List, CellMeasurer, WindowScroller, CellMeasurerCache,
 } from 'react-virtualized';
 import { useState, useEffect } from 'react';
+import { PullToRefresh } from 'antd-mobile';
+import { getFeeds } from '@services/tweet';
 
 import style from './index.module.scss';
 
@@ -22,7 +24,7 @@ const tweet = {
         id: 1, // the user's id that sent the comment
         username: 'Mewadmin',
         nickname: 'Mew',
-        avatar_url: 'https://www.pokemon.cn/play/resources/pokedex/img/pm/3373da1ae6e9a429e7fc8dbad72bf5f4726eb13b.png', // 发送该评论的用户头像地址
+        avatar_url: 'https://www.pokemon.cn/play/resources/pokedex/img/pm/3373da1ae6e9a429e7fc8dbad72bf5f4726eb13b.png', // The avatar address of the user who sent the comment
       },
       content: 'Test!', // The text content of this comment
       created_at: '2021-12-22T15:03:52.662052Z', // when the comment was created
@@ -92,16 +94,21 @@ const cache = new CellMeasurerCache({
   fixedWidth: true,
   minHeight: 200,
 });
+
+const noRowsRenderer = () => 'Loading...';
+
 /**
 * tweet page
 */
 const Tweets = () => {
-  const [data, setDate] = useState(defaultData);
+  const [data, setData] = useState([]);
   useEffect(() => {
-    console.log('data', data);
-    setDate(defaultData);
+    const init = async () => {
+      const res = await getFeeds();
+      setData(res);
+    };
+    init();
   }, []);
-  const noRowsRenderer = () => 'Loading...';
 
   const rowRenderer = ({
     key, style: sy, index, parent,
@@ -113,37 +120,45 @@ const Tweets = () => {
       rowIndex={index}
       parent={parent}
     >
-      {(registerChild) => (
+      {({ registerChild }) => (
         <div style={sy} key={key} ref={registerChild}>
           <TweetCard dataSource={data[index]} />
         </div>
       )}
     </CellMeasurer>
   );
+
   return (
     <div className={style.container}>
-      <WindowScroller>
-        {({
-          height, width, isScrolling, registerChild, onChildScroll, scrollTop,
-        }) => (
-          <div ref={registerChild}>
-            <List
-              isScrolling={isScrolling}
-              onScroll={onChildScroll}
-              scrollTop={scrollTop}
-              autoHeight
-              height={height}
-              deferredMeasurementCache={cache}
-              rowHeight={cache.rowHeight}
-              overscanRowCount={2}
-              noRowsRenderer={noRowsRenderer}
-              rowCount={data.length}
-              rowRenderer={rowRenderer}
-              width={width}
-            />
-          </div>
-        )}
-      </WindowScroller>
+      <PullToRefresh
+        onRefresh={async () => {
+          const res = await getFeeds();
+          setData((d) => [...d, ...res]);
+        }}
+      >
+        <WindowScroller>
+          {({
+            height, width, isScrolling, registerChild, onChildScroll, scrollTop,
+          }) => (
+            <div ref={registerChild}>
+              <List
+                isScrolling={isScrolling}
+                onScroll={onChildScroll}
+                scrollTop={scrollTop}
+                autoHeight
+                height={height}
+                deferredMeasurementCache={cache}
+                rowHeight={cache.rowHeight}
+                overscanRowCount={2}
+                noRowsRenderer={noRowsRenderer}
+                rowCount={data.length}
+                rowRenderer={rowRenderer}
+                width={width}
+              />
+            </div>
+          )}
+        </WindowScroller>
+      </PullToRefresh>
     </div>
   );
 };
