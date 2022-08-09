@@ -1,57 +1,77 @@
-import { TabBar } from 'antd-mobile';
+import { ActionSheet, TabBar, Toast } from 'antd-mobile';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import cycleSvg from '@assets/cycle.svg';
-import starSvg from '@assets/star.svg';
-import upSvg from '@assets/up.svg';
-import msgSvg from '@assets/msg.svg';
-
 import { useNavigate } from 'react-router-dom';
+import { cancelLike, likes } from '@services/comment';
+import {
+  ACTION_KEYS, getBars, ACTIONS, BAR_KEYS, OBJECT_KEYS,
+} from './constants';
+
 import style from './index.module.scss';
 
-const getBars = ({
-  commentsCount,
-  likesCount,
-  nav,
-  id,
-}) => [{
-  key: 'msg',
-  icon: (
-    <div onClick={() => nav(`/comment/${id}`)}>
-      <img className={style.icon} src={msgSvg} alt="" />
-      {commentsCount > 0 && <span className={style.count}>{commentsCount}</span>}
-    </div>),
-},
-{
-  key: 'cycle',
-  icon: <img className={style.icon} src={cycleSvg} alt="" />,
-},
-{
-  key: 'star',
-  icon: (
-    <div>
-      <img className={style.icon} src={starSvg} alt="" />
-      {likesCount > 0 && <span className={style.count}>{likesCount}</span>}
-    </div>),
-},
-{
-  key: 'up',
-  icon: <img className={style.icon} src={upSvg} alt="" />,
-}];
 /**
-* bar for comment, Retweet, like, share
+* bar for comment, forward, share
 */
 const Bar = ({
   id,
+  onlyStar,
   isBottom,
   likesCount,
   commentsCount,
+  type,
 }) => {
   const [activeKey, setActiveKey] = useState();
+  const [visible, setVisible] = useState(false);
+  const [liked, setLiked] = useState(false);
+
   const nav = useNavigate();
+
   const onChangeTabItem = (key) => {
     setActiveKey(key);
+    if (key === BAR_KEYS.CYCLE) {
+      Toast.show('Forward Successfully');
+    }
+    if (key === BAR_KEYS.UP) {
+      setVisible(true);
+    }
+    if (key === BAR_KEYS.STAR) {
+      if (liked) {
+        cancelLike({
+          content_type: type,
+          object_id: id, // The id of the liked object
+        }).then((res) => {
+          if (res.success) {
+            Toast.show('Unlike Successfully');
+            setLiked(false);
+            return;
+          }
+          Toast.show('Unlike Unsuccessfully');
+        });
+        return;
+      }
+      likes({
+        content_type: type,
+        object_id: id, // The id of the liked object
+      }).then((res) => {
+        if (res.success) {
+          Toast.show('Like Successfully');
+          setLiked(true);
+          return;
+        }
+        Toast.show('Like Unsuccessfully');
+      });
+    }
+  };
+
+  const onAction = (e) => {
+    if (e.key === ACTION_KEYS.COPY) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(`${window.location.origin}/tweet/${id}`);
+        Toast.show('Copy link Successfully');
+      }
+    }
+    setVisible(false);
   };
 
   return (
@@ -66,23 +86,38 @@ const Bar = ({
           commentsCount,
           nav,
           id,
+          onlyStar,
+          liked,
         }).map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} />
         ))}
       </TabBar>
+      <ActionSheet
+        visible={visible}
+        actions={ACTIONS}
+        onClose={() => setVisible(false)}
+        onAction={onAction}
+      />
     </div>
   );
 };
 
 Bar.propTypes = {
-  commentsCount: PropTypes.number.isRequired,
-  likesCount: PropTypes.number.isRequired,
+  commentsCount: PropTypes.number,
+  likesCount: PropTypes.number,
   isBottom: PropTypes.bool,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
+  onlyStar: PropTypes.bool,
+  type: PropTypes.oneOf([OBJECT_KEYS.COMMENT, OBJECT_KEYS.TWEET]),
 };
 
 Bar.defaultProps = {
   isBottom: false,
+  id: -1,
+  onlyStar: false,
+  commentsCount: 0,
+  likesCount: 0,
+  type: '',
 };
 
 export default Bar;
