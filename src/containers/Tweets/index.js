@@ -2,8 +2,8 @@ import TweetCard from '@components/TweetCard';
 import {
   List, CellMeasurer, WindowScroller, CellMeasurerCache,
 } from 'react-virtualized';
+import { InfiniteScroll, PullToRefresh } from 'antd-mobile';
 import { useState, useEffect } from 'react';
-import { PullToRefresh } from 'antd-mobile';
 import { getFeeds } from '@services/tweet';
 
 import style from './index.module.scss';
@@ -102,6 +102,7 @@ const noRowsRenderer = () => 'Loading...';
 */
 const Tweets = () => {
   const [data, setData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     const init = async () => {
       const res = await getFeeds();
@@ -127,6 +128,13 @@ const Tweets = () => {
       )}
     </CellMeasurer>
   );
+  const handleLoadMore = async () => {
+    const res = await getFeeds();
+    setData((d) => [...d, ...res]);
+    if (res.length === 0) {
+      setHasMore(false);
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -159,6 +167,7 @@ const Tweets = () => {
           )}
         </WindowScroller>
       </PullToRefresh>
+      <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} />
     </div>
   );
 };
