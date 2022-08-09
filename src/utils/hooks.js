@@ -90,3 +90,44 @@ export const usePullToRefresh = () => {
 
   return tip;
 };
+
+const OFFSET = 50;
+/**
+ * pull-up loading
+ */
+export const useDownLoad = () => {
+  const [loading, setLoading] = useState(false);
+  // Determine whether to reach bottom
+  // 1 document.documentElement.clientHeight
+  // document.body.scrollHeight
+  // document.documentElement.scrollTop
+  // 2 condition of reaching bottom. scrollTop + clientHeight = scrollHeight
+  // 3 OFFSET
+  // scrollTop + clientHeight >= scrollHeight - OFFSET;
+  useEffect(() => {
+    window.onscroll = () => {
+      if (loading) {
+        return;
+      }
+      const { clientHeight, scrollTop } = document.documentElement;
+      const { scrollHeight } = document.body;
+      if (scrollTop + clientHeight >= scrollHeight - OFFSET) {
+        setLoading(true);
+      }
+    };
+    return () => {
+      window.onscroll = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        console.log('finish');
+        setLoading(false);
+      }, 2000);
+    }
+  }, [loading]);
+
+  return loading;
+};
