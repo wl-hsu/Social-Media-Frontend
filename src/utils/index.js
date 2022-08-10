@@ -19,8 +19,8 @@ export const timeDiff = (time) => {
     return moment(time).format('MMM DD');
   }
   if (hours > 0) {
-    return `${hours}hr`;
+    return `${hours}hours`;
   }
   const minutes = moment().diff(time, 'minutes');
-  return `${minutes || 1}min`;
+  return `${minutes || 1}minutes`;
 };
