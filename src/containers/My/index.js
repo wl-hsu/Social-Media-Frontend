@@ -1,5 +1,8 @@
 import Header from '@components/Header';
+import TweetCard from '@components/TweetCard';
+import { getTweets } from '@services/tweet';
 import { useAppContext } from '@utils/context';
+import { useGoTo } from '@utils/hooks';
 import { Button } from 'antd-mobile';
 import { Tabs } from 'antd-mobile/es/components/tabs/tabs';
 import { useState, useEffect } from 'react';
@@ -11,10 +14,15 @@ import style from './index.module.scss';
 */
 const My = () => {
   const [store] = useAppContext();
-  const [data, setDate] = useState();
+  const [data, setDate] = useState([]);
+  const go = useGoTo();
+
   useEffect(() => {
-    console.log('data', data);
-    setDate([]);
+    const init = async () => {
+      const res = await getTweets();
+      setDate(res.data);
+    };
+    init();
   }, []);
   return (
     <div className={style.container}>
@@ -33,15 +41,15 @@ const My = () => {
         <span className={style.number1}>
           100
         </span>
-        following
+        <span onClick={() => go('follow')}>following</span>
         <span className={style.number2}>
           200
         </span>
-        follower
+        <span onClick={() => go('follow')}>follower</span>
       </div>
       <Tabs>
         <Tabs.Tab title="Tweets" key="tweet">
-          tweet
+          {data.map((item) => <TweetCard dataSource={item} />)}
         </Tabs.Tab>
         <Tabs.Tab title="Tweets & replies" key="reply">
           reply

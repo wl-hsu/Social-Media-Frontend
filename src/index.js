@@ -10,9 +10,11 @@ import Tweet from '@containers/Tweet';
 import Login from '@containers/Login';
 import App from '@containers/App';
 import Register from '@containers/Register';
-import My from '@containers/My';
 
 import './index.scss';
+import My from '@containers/My';
+import Follower from '@containers/Follower';
+import EditUser from '@containers/EditUser';
 
 // import { startVconsole } from './utils';
 
@@ -30,7 +32,9 @@ ReactDOM.render(
           <Route path="message" element={<Comment />} />
           <Route path="search" element={<Comment />} />
           <Route path="my" element={<My />} />
+          <Route path="follow" element={<Follower />} />
           <Route path="tweet/:id" element={<Tweet />} />
+          <Route path="editUser" element={<EditUser />} />
         </Route>
       </Routes>
     </BrowserRouter>
