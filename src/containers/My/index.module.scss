@@ -2,17 +2,6 @@
 
 .container {
   padding: 15px;
-  :global(.adm-tabs-content) {
-    padding: 0;
-  }
-  :global(.adm-tabs-tab) {
-    font-size: 14px;
-  }
-  :global(.adm-tabs-tab-active) {
-    color: #000;
-    font-size: 14px;
-    font-weight: 700;
-  }
 }
 .nickname {
   font-size: 19px;
@@ -58,4 +47,3 @@
   composes: number1;
   margin-left: 10px;
 }
-

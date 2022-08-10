@@ -19,3 +19,14 @@ $tBlackColor: #0f1419;
 .adm-text-area {
   --placeholder-color: #536471;
 }
+.adm-tabs-content {
+  padding: 0;
+}
+.adm-tabs-tab {
+  font-size: 14px;
+}
+.adm-tabs-tab-active {
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+}
