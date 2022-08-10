@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 /**
- * sed to show/hide other components
+ * Used to show/hide other components
  */
 const Show = ({
   visible,

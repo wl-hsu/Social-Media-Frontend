@@ -24,9 +24,9 @@ const MyPopup = ({
     >
       <div className={style.container}>
         <div className={style.title}>Account Info</div>
-        <img className={style.avatar} src={store.user.avatar_url} alt="头像" />
+        <img className={style.avatar} src={store.user.avatar_url} alt="avatar" />
         <div className={style.nickname}>
-          {store.user?.nickname || 'no known'}
+          {store.user?.nickname || 'unknwon'}
         </div>
         <div className={style.username}>
           @
