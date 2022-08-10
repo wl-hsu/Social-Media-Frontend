@@ -1,7 +1,7 @@
 import IconButton from '@components/IconButton';
 import createTweetSvg from '@assets/createTweet.svg';
 import PropTypes from 'prop-types';
-import { fileByBase64 } from '@utils/index';
+import { fileByBase64 } from '@utils/';
 import style from './index.module.scss';
 
 /**

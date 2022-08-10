@@ -3,6 +3,7 @@ import messageSvg from '@assets/message.svg';
 import tipSvg from '@assets/tip.svg';
 import searchSvg from '@assets/search.svg';
 import { matchPath } from 'react-router-dom';
+
 import style from '../common.module.scss';
 
 export const menus = [
@@ -37,7 +38,6 @@ export const menus = [
     title: 'Message',
     link: '/message',
     isMenu: true,
-    // eslint-disable-next-line no-undef
     icon: <img className={style.icon} src={messageSvg} alt="" />,
   },
   {
