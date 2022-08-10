@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import TInput from '@components/TInput';
 import {
   Button, Form, Dialog,
 } from 'antd-mobile';
 import { Link } from 'react-router-dom';
-import { useAppContext } from '@utils/context';
 import cookies from 'js-cookie';
+import { useAppContext } from '@utils/context';
+import TInput from '@components/TInput';
 import { login } from '../../services/login';
 import style from './index.module.scss';
 
@@ -26,16 +26,15 @@ const Login = () => {
     const values = await form.validateFields();
     if (values) {
       const res = await login(values.username, values.password);
-      console.log('>>', res);
       if (res.success && res.data.length > 0) {
         Dialog.alert({
-          content: 'Login success',
+          content: 'Login successfully',
         });
         cookies.set('userId', res.data[0].id);
         return;
       }
       Dialog.alert({
-        content: 'Login failure',
+        content: 'Login unsuccessfully',
       });
     }
   };

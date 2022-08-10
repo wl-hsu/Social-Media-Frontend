@@ -32,16 +32,16 @@ const defaultTweet = {
         avatar_url: null, // The avatar address of the user who sent the comment
       }, // Information of the user who sent this comment
       content: 'Test!', // The text content of this comment
-      created_at: '2022-07-22T15:03:52.662052Z', // when the comment was created
+      created_at: '2021-12-22T15:03:52.662052Z', // when the comment was created
       likes_count: 0, // Likes for this comment
       has_liked: false, // Whether the currently logged-in user has liked the comment, true: the currently logged-in user has liked the comment, false: the currently logged-in user has not liked the comment
     },
   ], // A collection of comments for this tweet
-  created_at: '2022-07-20T07:38:01.699129Z', // when the tweet was created
+  created_at: '2021-12-18T07:38:01.699129Z', // when the tweet was created
   content: 'I wanna make a test', // The text content of the tweet
   likes: [], // who liked the tweet
-  likes_count: 10, // Likes count for this tweet
-  comments_count: 122, // comment counts for this tweet
+  likes_count: 0, // Likes count for this tweet
+  comments_count: 1, // comment counts for this tweet
   has_liked: false, // Whether the currently logged-in user has liked the tweet, true: the currently logged-in user has liked the tweet, false: the currently logged-in user has not liked the tweet
   photo_urls: ['https://i.pinimg.com/originals/12/dc/90/12dc90c7703c43981e60fbada8f9f0b2.gif',
     'https://i.pinimg.com/originals/94/2b/91/942b9161e94d16a86a958b4d50d094fd.gif',
