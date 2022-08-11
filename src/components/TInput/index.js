@@ -18,7 +18,7 @@ const TInput = ({
       setIsFocused(true);
       setHide(true);
     }
-  }, []);
+  }, [value]);
 
   const onFocus = () => {
     setIsFocused(true);
@@ -57,6 +57,7 @@ const TInput = ({
         className={isFocused ? style.inputItemFocused : style.inputItem}
         onFocus={onFocus}
         onBlur={onBlur}
+        value={value}
         onChange={onChangeHandler}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...otherProps}

@@ -1,4 +1,3 @@
-import Header from '@components/Header';
 import TweetCard from '@components/TweetCard';
 import { getTweets } from '@services/tweet';
 import { useAppContext } from '@utils/context';
@@ -26,10 +25,14 @@ const My = () => {
   }, []);
   return (
     <div className={style.container}>
-      <Header title={store.user?.nickname || 'unknown'} />
       <div className={style.header} />
       <img className={style.avatar} src={store.user?.avatar_url} alt="" />
-      <Button className={style.edit}>Edit profile</Button>
+      <Button
+        className={style.edit}
+        onClick={() => go('editUser')}
+      >
+        Edit profile
+      </Button>
       <div className={style.nickname}>
         {store.user?.nickname || 'unknown'}
       </div>
@@ -48,10 +51,10 @@ const My = () => {
         <span onClick={() => go('follow')}>follower</span>
       </div>
       <Tabs>
-        <Tabs.Tab title="Tweets" key="tweet">
-          {data.map((item) => <TweetCard dataSource={item} />)}
+        <Tabs.Tab title="tweet" key="tweet">
+          {data.map((item) => <TweetCard key={item.id} dataSource={item} />)}
         </Tabs.Tab>
-        <Tabs.Tab title="Tweets & replies" key="reply">
+        <Tabs.Tab title="tweet & replies" key="tweet & replies">
           reply
         </Tabs.Tab>
       </Tabs>
