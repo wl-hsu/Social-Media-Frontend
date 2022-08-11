@@ -28,9 +28,6 @@ ReactDOM.render(
           <Route path="login" element={<Login />} />
           <Route path="comment/:id" element={<Comment />} />
           <Route path="createTweet" element={<CreatTweet />} />
-          <Route path="tip" element={<Comment />} />
-          <Route path="message" element={<Comment />} />
-          <Route path="search" element={<Comment />} />
           <Route path="my" element={<My />} />
           <Route path="follow" element={<Follower />} />
           <Route path="tweet/:id" element={<Tweet />} />
