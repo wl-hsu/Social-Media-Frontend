@@ -12,7 +12,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import style from './index.module.scss';
 
 const App = () => {
-  const [, setStore] = useAppContext();
+  const [store, setStore] = useAppContext();
   const nav = useNavigate();
   const location = useLocation();
   const menu = useCurMenu();
@@ -20,8 +20,11 @@ const App = () => {
     const init = async () => {
       const userId = Cookies.get('userId');
       if (!userId) {
-        Toast.show('please re-login...');
+        Toast.show('Please re-login...');
         nav('/login');
+        return;
+      }
+      if (store.user) {
         return;
       }
       const res = await getUser(userId);
@@ -37,7 +40,7 @@ const App = () => {
       nav('/login');
     };
     init();
-  }, []);
+  }, [location.pathname]);
 
   const onClickCreateTweet = () => {
     nav('/createTweet');

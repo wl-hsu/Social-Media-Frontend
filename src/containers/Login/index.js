@@ -4,6 +4,7 @@ import {
 } from 'antd-mobile';
 import { Link } from 'react-router-dom';
 import cookies from 'js-cookie';
+import { useGoTo } from '@utils/hooks';
 import { useAppContext } from '@utils/context';
 import TInput from '@components/TInput';
 import { login } from '../../services/login';
@@ -14,6 +15,7 @@ import style from './index.module.scss';
  */
 const Login = () => {
   const [form] = Form.useForm();
+  const go = useGoTo();
 
   const [, setStore] = useAppContext();
   useEffect(() => {
@@ -31,6 +33,7 @@ const Login = () => {
           content: 'Login successfully',
         });
         cookies.set('userId', res.data[0].id);
+        go('tweets');
         return;
       }
       Dialog.alert({
@@ -60,7 +63,7 @@ const Login = () => {
             { required: true, message: 'Password is required' },
           ]}
         >
-          <TInput label="Password" type="password" />
+          <TInput label="password" type="password" />
         </Form.Item>
         <Button className={style.footerButton} onClick={onSubmit}>
           Next

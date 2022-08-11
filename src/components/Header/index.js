@@ -5,6 +5,7 @@ import { useCurMenu, useGoTo } from '@utils/hooks';
 import classNames from 'classnames';
 import MyPopup from '@components/MyPopup';
 import { useState } from 'react';
+import Avatar from '@components/Avatar';
 import logo from '../../assets/twitter-logo.svg';
 
 import style from './index.module.scss';
@@ -48,19 +49,18 @@ const Header = ({
         onClose={() => setVisible(false)}
       />);
       result.push(
-        <div
-          key="avatarUrl"
+        <Avatar
           className={style.backHeader}
+          key="avatarUrl"
+          avatarUrl={store.user?.avatar_url}
           onClick={
           () => setVisible(true)
           }
-        >
-          <img src={store.user?.avatar_url} alt="" className={style.avatar} />
-        </div>,
+        />,
       );
       result.push(
         <span key="title" className={style.title}>
-          {store.title}
+          {menu.title}
         </span>,
       );
     }
