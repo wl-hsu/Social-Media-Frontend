@@ -66,7 +66,7 @@ const Login = () => {
           <TInput label="password" type="password" />
         </Form.Item>
         <Button className={style.footerButton} onClick={onSubmit}>
-          Next
+          Log in
         </Button>
       </Form>
       <div className={style.goToRegister}>
