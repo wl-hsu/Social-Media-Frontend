@@ -1,8 +1,19 @@
-# Social Media Frontend
-a twitter-like frontend projet
+# Twitter-frontend
+A twitter-like project implement by react.
 
-## How to start?
+## getting start
+### Install dependies
+In the node16.x or higher environment and run the following comments
+```
+npm install
+```
+### run frontend
+```
 npm start
-
-## How to access?
-https://localhost:3000/
+```
+### run mock backend service
+```
+npm run mock
+```
+### How to access
+http://localhost:3000/
