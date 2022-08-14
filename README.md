@@ -1,5 +1,5 @@
 # Twitter-frontend
-A twitter-like project implement by react.
+A twitter-like frontend project implement by react.
 
 ## getting start
 ### Install dependies
